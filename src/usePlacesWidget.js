@@ -4,6 +4,18 @@ import { loadGoogleMapScript, isBrowser } from "./utils";
 import { GOOGLE_MAP_SCRIPT_BASE_URL } from "./constants";
 
 export default function usePlacesWidget(props) {
+  const catalonia = {
+    "Espanya": "Catalunya",
+    "España": "Cataluña",
+    "Spain": "Catalonia",
+  }
+
+  const spain = {
+    "Espanya": "Reste de l'estat",
+    "España": "Resto del estado",
+    "Spain": "Spain"
+  }
+
   const {
     ref,
     onPlaceSelected,
@@ -73,8 +85,23 @@ export default function usePlacesWidget(props) {
         "place_changed",
         () => {
           if (onPlaceSelected && autocompleteRef && autocompleteRef.current) {
+            const place = autocompleteRef.current.getPlace()
+            const country_code = place.address_components.find((x) => x.types[0] == "country")
+            const political = place.address_components.find((x) => x.types[0] == "administrative_area_level_1")
+
+            console.log(place)
+            if (country_code && country_code.short_name == "ES") {
+              if ( political.short_name == "CT") {
+                for ( const [key, value] of Object.entries(catalonia) )
+                  place.formatted_address = place.formatted_address.replace(", " + key, ", " + value)
+              }else{
+                for ( const [key, value] of Object.entries(spain) )
+                  place.formatted_address = place.formatted_address.replace(", " + key, ", " + value)
+              }
+            }
+
             onPlaceSelected(
-              autocompleteRef.current.getPlace(),
+              place,
               inputRef.current,
               autocompleteRef.current
             );
