@@ -20,7 +20,7 @@ export default function usePlacesWidget(props) {
     ref,
     onPlaceSelected,
     apiKey,
-    inputAutocompleteValue = "new-password",
+    inputAutocompleteValue = "adreça",
     options: {
       types = ["(cities)"],
       componentRestrictions,
@@ -88,7 +88,7 @@ export default function usePlacesWidget(props) {
             const place = autocompleteRef.current.getPlace()
             const country_code = place.address_components.find((x) => x.types[0] == "country")
             const political = place.address_components.find((x) => x.types[0] == "administrative_area_level_1")
-            
+
             if (country_code && country_code.short_name == "ES") {
               if ( political.short_name == "CT") {
                 for ( const [key, value] of Object.entries(catalonia) )
