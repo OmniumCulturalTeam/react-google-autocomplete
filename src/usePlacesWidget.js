@@ -11,7 +11,7 @@ export default function usePlacesWidget(props) {
   }
 
   const spain = {
-    "Espanya": "Reste de l'estat",
+    "Espanya": "Resta de l'estat",
     "España": "Resto del estado",
     "Spain": "Spain"
   }
