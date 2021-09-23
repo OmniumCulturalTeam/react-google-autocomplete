@@ -5,9 +5,9 @@ import { GOOGLE_MAP_SCRIPT_BASE_URL } from "./constants";
 
 export default function usePlacesWidget(props) {
   const catalonia = {
-    "Espanya": "Catalunya",
-    "España": "Cataluña",
-    "Spain": "Catalonia",
+    "Espanya": ", Catalunya",
+    "España": ", Cataluña",
+    "Spain": ", Catalonia",
   }
 
   const spain = {
@@ -104,19 +104,19 @@ export default function usePlacesWidget(props) {
             if (country_code && country_code.short_name == "ES") {
               if ( political.short_name == "CT") {
                 for ( const [key, value] of Object.entries(catalonia) )
-                  place.formatted_address = place.formatted_address.replace(", " + key, ", " + value)
+                  place.formatted_address = place.formatted_address.replace(", " + key, value)
               }else{
                 for ( const [key, value] of Object.entries(spain) )
-                  place.formatted_address = place.formatted_address.replace(", " + key, ", " + value)
+                  place.formatted_address = place.formatted_address.replace(", " + key, value)
               }
             }
             if (country_code && country_code.short_name == "FR") {
               for ( const [key, value] of Object.entries(france) )
-                place.formatted_address = place.formatted_address.replace(", " + key, ", " + value)
+                place.formatted_address = place.formatted_address.replace(", " + key, value)
             }
             if (country_code && country_code.short_name == "IT") {
               for ( const [key, value] of Object.entries(italy) )
-                place.formatted_address = place.formatted_address.replace(", " + key, ", " + value)
+                place.formatted_address = place.formatted_address.replace(", " + key, value)
             }
 
             onPlaceSelected(
