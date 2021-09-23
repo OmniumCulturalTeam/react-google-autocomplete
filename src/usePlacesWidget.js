@@ -11,9 +11,21 @@ export default function usePlacesWidget(props) {
   }
 
   const spain = {
-    "Espanya": "Reste de l'estat",
-    "España": "Resto del estado",
-    "Spain": "Spain"
+    "Espanya": "",
+    "España": "",
+    "Spain": ""
+  }
+
+  const france = {
+    "França": "",
+    "Francia": "",
+    "France": ""
+  }
+
+  const italy = {
+    "Itàlia": "",
+    "Italia": "",
+    "Italy": ""
   }
 
   const {
@@ -97,6 +109,14 @@ export default function usePlacesWidget(props) {
                 for ( const [key, value] of Object.entries(spain) )
                   place.formatted_address = place.formatted_address.replace(", " + key, ", " + value)
               }
+            }
+            if (country_code && country_code.short_name == "FR") {
+              for ( const [key, value] of Object.entries(france) )
+                place.formatted_address = place.formatted_address.replace(", " + key, ", " + value)
+            }
+            if (country_code && country_code.short_name == "IT") {
+              for ( const [key, value] of Object.entries(italy) )
+                place.formatted_address = place.formatted_address.replace(", " + key, ", " + value)
             }
 
             onPlaceSelected(
