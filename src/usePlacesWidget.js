@@ -5,9 +5,9 @@ import { GOOGLE_MAP_SCRIPT_BASE_URL } from "./constants";
 
 export default function usePlacesWidget(props) {
   const catalonia = {
-    "Espanya": ", Catalunya",
-    "España": ", Cataluña",
-    "Spain": ", Catalonia",
+    "Espanya": "",
+    "España": "",
+    "Spain": "",
   }
 
   const spain = {
