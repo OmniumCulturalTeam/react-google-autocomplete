@@ -26,7 +26,7 @@ or
 As of version 1.2.4, you can now pass an `apiKey` prop to automatically load the Google maps scripts. The api key can be found in your [google cloud console.](https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 ```js
-<AutoComplete
+<Autocomplete
   apiKey={YOUR_GOOGLE_MAPS_API_KEY}
   onPlaceSelected={(place) => console.log(place)}
 />
@@ -83,6 +83,8 @@ import Autocomplete from "react-google-autocomplete";
 - `defaultValue` prop is used for setting up the default value e.g `defaultValue={'Amsterdam'}`.
 
 - `language`: Set [language](https://developers.google.com/maps/documentation/places/web-service/details#PlaceDetailsRequests) to be used for the results. If not specified, Google defaults to load the most appropriate language based on the users location or browser setting.
+
+- `libraries`: prop is used for loading additional google libraries alongside the places api, `defaultValue={["places"]}`.
 
 You can pass any prop specified for the hmtl [input tag](https://www.w3schools.com/tags/tag_input.asp). You can also set [options.fields](https://developers.google.com/maps/documentation/javascript/reference/places-service#PlaceResult) prop if you need extra information, now it defaults to basic data in order to control expenses.
 
@@ -142,7 +144,7 @@ export default () => {
   useEffect(() => {
     // fetch place details for the first element in placePredictions array
     if (placePredictions.length)
-      service.placesService?.getDetails(
+      placesService?.getDetails(
         {
           placeId: placePredictions[0].place_id,
         },
@@ -178,6 +180,7 @@ The hook has only one config argument.
   - `options`: Default [options](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#QueryAutocompletionRequest) which will be passed to every request.
   - `sessionToken`: If true then a [session token](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompleteSessionToken) will be attached to every request.
   - `language`: If the language code is set, the results will be returned in the specificed [language](https://developers.google.com/maps/documentation/places/web-service/details#PlaceDetailsRequests)
+  - `libraries`: prop is used for loading additional google libraries alongside the places api, `defaultValue={["places"]}`.
 
 ### Returned value
 
@@ -186,6 +189,7 @@ The hook returns an object with properties:
 - `placesAutocompleteService`: Instance of [AutocompleteService](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompleteService)
 - `placesService`: Instance of [PlacesService](https://developers.google.com/maps/documentation/javascript/reference/places-service#PlacesService)
 - `autocompleteSessionToken`: Instance of [AutocompleteSessionToken](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompleteSessionToken). You can use this to [group several requests into a single session](https://developers.google.com/maps/documentation/places/web-service/session-tokens)
+- `refreshSessionToken`: call this function if you need [to refresh the session token](https://developers.google.com/maps/documentation/places/web-service/session-tokens)
 - `placePredictions`: an array of [AutocompletePrediction](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompleteResponse)
 - `isPlacePredictionsLoading`: sets to true when a `getPlacePredictions` request is being sent and not yet resolved.
 - `getPlacePredictions: (opt: `[Options](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest)`): void`: a function which you call whenever you want to request places predictions. Takes one [argument](https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompleteResponse).
@@ -264,7 +268,7 @@ Debounce example lives [here](/docs/debounce.js)
 
 ### Typescript
 
-We are planning on rewriting the library with TS/Flow in the later releases but you can already use it with TypeScript bacause we use [declaration files](https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html).
+We are planning on rewriting the library with TS/Flow in the later releases but you can already use it with TypeScript because we use [declaration files](https://www.typescriptlang.org/docs/handbook/declaration-files/dts-from-js.html).
 
 ### TODO
 

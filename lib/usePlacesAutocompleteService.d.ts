@@ -1,8 +1,9 @@
 interface usePlacesAutocompleteServiceConfig {
   apiKey?: string;
+  libraries?: string[];
   googleMapsScriptBaseUrl?: string;
   debounce?: number;
-  options?: google.maps.places.QueryAutocompletionRequest;
+  options?: google.maps.places.AutocompletionRequest;
   sessionToken?: boolean;
   language?: string;
 }
@@ -21,6 +22,7 @@ interface usePlacesAutocompleteServiceResponse {
   getQueryPredictions: (
     opt: google.maps.places.QueryAutocompletionRequest
   ) => void;
+  refreshSessionToken: () => void;
 }
 
 export default function usePlacesAutocompleteService(
