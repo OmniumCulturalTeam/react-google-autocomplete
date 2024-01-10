@@ -99,10 +99,10 @@ export default function usePlacesWidget(props) {
           () => {
             if (onPlaceSelected && autocompleteRef && autocompleteRef.current) {
               const place = autocompleteRef.current.getPlace();
-              const country_code = place.address_components.find(
+              const country_code = place?.address_components.find(
                 (x) => x.types[0] == "country"
               );
-              const political = place.address_components.find(
+              const political = place?.address_components.find(
                 (x) => x.types[0] == "administrative_area_level_1"
               );
 
